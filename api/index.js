@@ -7,7 +7,7 @@ export const config = {
   maxDuration: 60,
 };
 
-const TARGET_BASE = (process.env.TARGET_DOMAIN || "").replace(/\/$/, "");
+const TARGET_BASE = (process.env.TARGET || "").replace(/\/$/, "");
 const PLATFORM_HEADER_PREFIX = `x-${String.fromCharCode(118, 101, 114, 99, 101, 108)}-`;
 
 const STRIP_HEADERS = new Set([
@@ -29,7 +29,7 @@ const STRIP_HEADERS = new Set([
 export default async function handler(req, res) {
   if (!TARGET_BASE) {
     res.statusCode = 500;
-    return res.end("Misconfigured: TARGET_DOMAIN is not set");
+    return res.end("Misconfigured: TARGET is not set");
   }
 
   try {
